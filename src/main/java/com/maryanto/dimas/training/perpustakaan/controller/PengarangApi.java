@@ -27,13 +27,6 @@ public class PengarangApi {
         return ResponseEntity.ok(pengarang);
     }
 
-    @GetMapping("/contoh")
-    public Pengarang init(
-            @RequestParam(name = "nama") String data1,
-            @RequestParam(value = "alamat", required = false) String data2){
-        return new Pengarang(null, data1, data2);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Pengarang> findById(
             @PathVariable("id") String pengarangId) {
