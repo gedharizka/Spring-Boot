@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@ToString(exclude = "daftarBuku")
 @Entity
 @Table(name = "pengarang")
 public class Pengarang {
@@ -27,4 +28,7 @@ public class Pengarang {
     @Type(type = "text")
     @Column(name = "alamat")
     private String alamat;
+//
+//    @OneToMany(mappedBy = "pengarang")
+//    private List<Buku> daftarBuku = new ArrayList<>();
 }

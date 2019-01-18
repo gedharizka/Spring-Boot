@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@ToString(exclude = "daftarBuku")
 @Entity
 @Table(name = "penerbit")
 public class Penerbit {
@@ -22,4 +23,7 @@ public class Penerbit {
 
     @Column(name = "nama", nullable = false)
     private String nama;
+
+//    @OneToMany(mappedBy = "penerbit")
+//    private List<Buku> daftarBuku = new ArrayList<>();
 }
