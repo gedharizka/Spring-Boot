@@ -35,4 +35,15 @@ public class TransactionApi {
         transaction = service.penjamBuku(transaction);
         return ResponseEntity.ok(transaction);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Transaction> pengembalianBukuById(@PathVariable("id") String id) {
+        Optional<Transaction> transactionOptional = service.findById(id);
+        if (!transactionOptional.isPresent())
+            return ResponseEntity.noContent().build();
+        else {
+            service.pengembalian(transactionOptional.get());
+            return ResponseEntity.ok().build();
+        }
+    }
 }
