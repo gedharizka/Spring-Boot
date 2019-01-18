@@ -1,16 +1,20 @@
 package com.maryanto.dimas.training.perpustakaan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString(exclude = "daftarBuku")
+@ToString(exclude = "daftarBuku")
 @Entity
 @Table(name = "penerbit")
 public class Penerbit {
@@ -24,6 +28,7 @@ public class Penerbit {
     @Column(name = "nama", nullable = false)
     private String nama;
 
-//    @OneToMany(mappedBy = "penerbit")
-//    private List<Buku> daftarBuku = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "penerbit")
+    private List<Buku> daftarBuku = new ArrayList<>();
 }

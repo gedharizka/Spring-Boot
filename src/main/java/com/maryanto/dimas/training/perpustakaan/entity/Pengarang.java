@@ -1,17 +1,21 @@
 package com.maryanto.dimas.training.perpustakaan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString(exclude = "daftarBuku")
+@ToString(exclude = "daftarBuku")
 @Entity
 @Table(name = "pengarang")
 public class Pengarang {
@@ -28,7 +32,8 @@ public class Pengarang {
     @Type(type = "text")
     @Column(name = "alamat")
     private String alamat;
-//
-//    @OneToMany(mappedBy = "pengarang")
-//    private List<Buku> daftarBuku = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "pengarang")
+    private List<Buku> daftarBuku = new ArrayList<>();
 }
