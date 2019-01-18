@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +26,11 @@ public class PenerbitApi {
     public ResponseEntity<Penerbit> save(@RequestBody Penerbit penerbit) {
         penerbit = repository.save(penerbit);
         return ResponseEntity.ok(penerbit);
+    }
+
+    @GetMapping("/findByNama")
+    public List<Penerbit> findByNama(@RequestParam("nama") String nama){
+        return repository.findByNama(nama);
     }
 
     @PutMapping("/")
