@@ -2,6 +2,7 @@ package com.maryanto.dimas.training.perpustakaan.controller;
 
 import com.maryanto.dimas.training.perpustakaan.entity.Anggota;
 import com.maryanto.dimas.training.perpustakaan.repository.AnggotaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/anggota")
 public class AnggotaApi {
@@ -32,11 +34,12 @@ public class AnggotaApi {
             return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/")
+    @RequestMapping(path = "/", method = RequestMethod.POST)
     public ResponseEntity<Anggota> save(Principal principal, @RequestBody Anggota anggota) {
         anggota.setCreatedBy(principal.getName());
         anggota.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
         anggota = repository.save(anggota);
+        log.info("{}", anggota);
         return ResponseEntity.ok(anggota);
     }
 
