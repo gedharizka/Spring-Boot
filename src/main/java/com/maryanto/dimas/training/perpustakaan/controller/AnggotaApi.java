@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +33,9 @@ public class AnggotaApi {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Anggota> save(@RequestBody Anggota anggota) {
+    public ResponseEntity<Anggota> save(Principal principal, @RequestBody Anggota anggota) {
+        anggota.setCreatedBy(principal.getName());
+        anggota.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
         anggota = repository.save(anggota);
         return ResponseEntity.ok(anggota);
     }

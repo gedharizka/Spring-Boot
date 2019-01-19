@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
@@ -30,4 +31,10 @@ public class Anggota {
     @Type(type = "text")
     @Column(name = "alamat")
     private String alamat;
+
+    @Column(name = "created_date")
+    private Timestamp createdDate;
+
+    @Column(name = "created_by", length = 50)
+    private String createdBy;
 }
