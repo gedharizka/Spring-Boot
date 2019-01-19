@@ -5,6 +5,9 @@ import com.maryanto.dimas.training.perpustakaan.repository.AnggotaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -20,13 +23,17 @@ public class AnggotaApi {
     @Autowired
     private AnggotaRepository repository;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/list")
     public Iterable<Anggota> findAll() {
+        log.info("method ini di akses");
         return repository.findAll();
     }
 
+    @PostAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Anggota> findById(@PathVariable("id") String id) {
+        log.info("method ini di akses");
         Optional<Anggota> anggotaOptional = repository.findById(id);
         if (anggotaOptional.isPresent())
             return ResponseEntity.ok(anggotaOptional.get());
